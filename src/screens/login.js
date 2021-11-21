@@ -9,14 +9,14 @@ import {
   Pressable,
   Modal,
   TouchableOpacity,
+  BackHandler,
 } from 'react-native';
 import api from './url';
 import {AuthContext} from './context';
 import {RNCamera} from 'react-native-camera';
-
+import Dialog from 'react-native-dialog';
 
 const LoginScreen = ({navigation: {navigate}}) => {
-
   let {signIn} = React.useContext(AuthContext);
   const [firstName, setfirstName] = React.useState('');
   const [lastName, setlastName] = React.useState('');
@@ -27,14 +27,12 @@ const LoginScreen = ({navigation: {navigate}}) => {
   let cameraRef = useRef(null);
 
   async function takePicture() {
-    console.log(
-      'camera',
-    );
+    console.log('camera');
     if (cameraRef) {
       const options = {quality: 0.5, base64: true};
       const data = await cameraRef.current.takePictureAsync(options);
-      console.log(data.base64)
-      setphoto(data.base64)
+      console.log(data.base64);
+      setphoto(data.base64);
 
       setModalVisible(false);
     }
@@ -42,6 +40,7 @@ const LoginScreen = ({navigation: {navigate}}) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.container}></View>
       <Image
         style={{width: 160, height: 160, marginTop: 150}}
         source={require('../images/CS.png')}
@@ -57,7 +56,7 @@ const LoginScreen = ({navigation: {navigate}}) => {
         <RNCamera
           ref={cameraRef}
           style={styles.preview}
-          type={RNCamera.Constants.Type.front}
+          type={RNCamera.Constants.Type.back}
           flashMode={RNCamera.Constants.FlashMode.on}
         />
         <View
@@ -129,14 +128,15 @@ const LoginScreen = ({navigation: {navigate}}) => {
         value={contactNumber}
         placeholder="Contact Number"
       />
-        <View style={{height: 48, width: 295, marginTop: 28, borderRadius: 6}}>
+      <View style={{height: 48, width: 295, marginTop: 28, borderRadius: 6}}>
         <Button title="Take Picture" onPress={() => setModalVisible(true)} />
       </View>
       <View style={{height: 48, width: 295, marginTop: 28, borderRadius: 6}}>
-       
         <Button
           title="Sign in"
-          onPress={() => signIn({contactNumber, address, lastName, firstName,photo})}
+          onPress={() =>
+            signIn({contactNumber, address, lastName, firstName, photo})
+          }
         />
       </View>
       <Text>SLIIT</Text>

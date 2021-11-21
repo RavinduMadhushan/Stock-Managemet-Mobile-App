@@ -16,7 +16,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {AuthContext} from './src/screens/context';
 import {AsyncStorage} from 'react-native';
-import {View, ActivityIndicator, Modal,Image} from 'react-native';
+import {View, ActivityIndicator, Modal, Image} from 'react-native';
 
 import {
   Colors,
@@ -26,9 +26,9 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Home from './src/screens/home';
+import Policy from './src/screens/policy';
 
 export default function App({navigation}) {
-
   const Stack = createStackNavigator();
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
@@ -68,8 +68,7 @@ export default function App({navigation}) {
         let userToken;
 
         try {
-          userToken = await AsyncStorage.getItem('users');
-      
+          userToken = await AsyncStorage.getItem('us');
         } catch (e) {}
         dispatch({type: 'RESTORE_TOKEN', token: userToken});
       };
@@ -81,22 +80,17 @@ export default function App({navigation}) {
   const authContext = React.useMemo(
     () => ({
       signIn: async data => {
-
         var data = {
           firstName: data.firstName,
           lastName: data.lastName,
           address: data.address,
           contactNumber: data.contactNumber,
-          photo:data.photo
+          photo: data.photo,
         };
-        console.log(
-          'SIGNIN'
-        );
-        console.log(
-          data,
-        );
+        console.log('SIGNIN');
+        console.log(data);
         try {
-          fetch(`http://192.168.8.100:3000/customer`, {
+          fetch(`http://192.168.8.101:3000/customer`, {
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -106,14 +100,10 @@ export default function App({navigation}) {
           })
             .then(res => res.json())
             .then(async res => {
-              console.log('res')
+              console.log('res');
               console.log(res.firstName);
               if (res) {
-               
-                await AsyncStorage.setItem(
-                  "users",
-                  JSON.stringify(res.firstName)
-                );
+                await AsyncStorage.setItem('u', JSON.stringify(res.firstName));
 
                 dispatch({type: 'SIGN_IN', token: res.firstName});
               } else {
@@ -149,29 +139,28 @@ export default function App({navigation}) {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}>
-        {state.userToken == null ? (
-          // No token found, user isn't signed in
-          <>
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="camera" component={ExampleApp}
-          />
-          </>
-        ) : (
-          // User is signed in
-          <>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="recommnder" component={Recommndations} />
-          <Stack.Screen name="shopping" component={Shopping} />
-          <Stack.Screen name="remainder" component={Remainder} />
-          
-          </>
-        )}
-      </Stack.Navigator>
-      </NavigationContainer> 
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          {state.userToken == null ? (
+            // No token found, user isn't signed in
+            <>
+              <Stack.Screen name="policy" component={Policy} />
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="camera" component={ExampleApp} />
+            </>
+          ) : (
+            // User is signed in
+            <>
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen name="recommnder" component={Recommndations} />
+              <Stack.Screen name="shopping" component={Shopping} />
+              <Stack.Screen name="remainder" component={Remainder} />
+            </>
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
       {/* <NavigationContainer>
      
         {state.userToken == null ? (

@@ -9,16 +9,16 @@ import {
   StatusBar,
 } from 'react-native';
 
-
 class HomeScreen extends Component {
   state = {
-    id: '',lineid:''
+    id: '',
+    lineid: '',
   };
 
   constructor(props) {
     super(props);
 
-    this.state = {id: '',lineid:''};
+    this.state = {id: '', lineid: ''};
   }
 
   static navigationOptions = {
@@ -33,7 +33,23 @@ class HomeScreen extends Component {
   };
 
   componentDidMount() {
-
+    fetch(
+      'http://2344-2402-4000-2280-97f7-1d26-d91a-7ab9-7e1e.ngrok.io/api/purchase/prediction',
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({item_id: 'aaa'}),
+      },
+    )
+      .then(res => res.json())
+      .then(resJson => {
+        this.setState({data: resJson});
+        this.setState({refreshing: false});
+      })
+      .catch(e => console.log(e));
   }
   render() {
     let width = Dimensions.get('window').width - 40;
@@ -46,7 +62,6 @@ class HomeScreen extends Component {
           alignItems: 'center',
           backgroundColor: '#ececec',
         }}>
-           
         <StatusBar backgroundColor="#018786" barStyle="light-content" />
         <TouchableOpacity
           style={[
@@ -60,12 +75,14 @@ class HomeScreen extends Component {
               height: 80,
             },
           ]}
-          onPress={() =>
-            this.props.navigation.navigate('recommnder')
-          }
+          onPress={() => this.props.navigation.navigate('recommnder')}
           activeOpacity={0.8}>
-          <Text style={{fontSize: 30, fontWeight: 'bold'}}>You Would love to try</Text>
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>(Recommendations)</Text>
+          <Text style={{fontSize: 30, fontWeight: 'bold'}}>
+            You Would love to try
+          </Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+            (Recommendations)
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
@@ -79,13 +96,10 @@ class HomeScreen extends Component {
               height: 80,
             },
           ]}
-          onPress={() =>
-            this.props.navigation.navigate('remainder')
-          }
+          onPress={() => this.props.navigation.navigate('remainder')}
           activeOpacity={0.8}>
-             <Text style={{fontSize: 30, fontWeight: 'bold'}}>May runout of</Text>
+          <Text style={{fontSize: 30, fontWeight: 'bold'}}>May runout of</Text>
           <Text style={{fontSize: 18, fontWeight: 'bold'}}>(Reminders)</Text>
-       
         </TouchableOpacity>
         <TouchableOpacity
           style={[
@@ -99,13 +113,12 @@ class HomeScreen extends Component {
               height: 80,
             },
           ]}
-          onPress={() =>
-            this.props.navigation.navigate('shopping')
-          }
+          onPress={() => this.props.navigation.navigate('shopping')}
           activeOpacity={0.8}>
-         <Text style={{fontSize: 30, fontWeight: 'bold'}}>Today Shopping</Text>
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>(Shopping List)</Text>
-      
+          <Text style={{fontSize: 30, fontWeight: 'bold'}}>Today Shopping</Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+            (Shopping List)
+          </Text>
         </TouchableOpacity>
         <Text style={{fontSize: 35, fontWeight: 'bold'}}>Main Menu</Text>
       </View>
