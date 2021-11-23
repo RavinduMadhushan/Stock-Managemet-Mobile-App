@@ -119,6 +119,23 @@ class HomeScreen extends Component {
             (Shopping List)
           </Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            {margin: 20},
+            {
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'skyblue',
+              width: width,
+              borderRadius: 10,
+              height: 80,
+            },
+          ]}
+          onPress={() => this.props.navigation.navigate('rate')}
+          activeOpacity={0.8}>
+          <Text style={{fontSize: 30, fontWeight: 'bold'}}>Rate ur Items</Text>
+        </TouchableOpacity>
+
         <Text style={{fontSize: 35, fontWeight: 'bold'}}>Main Menu</Text>
       </View>
     );

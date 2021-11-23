@@ -10,6 +10,8 @@ import {
   Modal,
   TouchableOpacity,
   BackHandler,
+  ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import api from './url';
 import {AuthContext} from './context';
@@ -39,109 +41,118 @@ const LoginScreen = ({navigation: {navigate}}) => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.container}></View>
-      <Image
-        style={{width: 160, height: 160, marginTop: 150}}
-        source={require('../images/CS.jpg')}
-      />
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
-        <RNCamera
-          ref={cameraRef}
-          style={styles.preview}
-          type={RNCamera.Constants.Type.back}
-          flashMode={RNCamera.Constants.FlashMode.on}
-          focusDepth={1}
-        />
-        <View
-          style={{
-            flex: 0,
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}></View>
-        <Pressable
-          style={[styles.button, styles.buttonClose]}
-          onPress={() => setModalVisible(!modalVisible)}>
-          <TouchableOpacity
-            onPress={takePicture.bind(this)}
-            style={styles.capture}>
-            <Text style={{fontSize: 14}}> SNAP </Text>
-          </TouchableOpacity>
-        </Pressable>
-      </Modal>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.container}></View>
+          <Image
+            style={{width: 160, height: 160, marginTop: 150}}
+            source={require('../images/CS.jpg')}
+          />
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert('Modal has been closed.');
+              setModalVisible(!modalVisible);
+            }}>
+            <RNCamera
+              ref={cameraRef}
+              style={styles.preview}
+              type={RNCamera.Constants.Type.back}
+              flashMode={RNCamera.Constants.FlashMode.on}
+              focusDepth={1}
+            />
+            <View
+              style={{
+                flex: 0,
+                flexDirection: 'row',
+                justifyContent: 'center',
+              }}></View>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <TouchableOpacity
+                onPress={takePicture.bind(this)}
+                style={styles.capture}>
+                <Text style={{fontSize: 14}}> SNAP </Text>
+              </TouchableOpacity>
+            </Pressable>
+          </Modal>
 
-      <TextInput
-        style={{
-          height: 40,
-          borderColor: '#BCE0FD',
-          borderWidth: 1,
-          marginTop: 32,
-          width: 288,
-          borderRadius: 6,
-        }}
-        onChangeText={setfirstName}
-        value={firstName}
-        placeholder="First Name"
-      />
-      <TextInput
-        style={{
-          height: 40,
-          borderColor: '#BCE0FD',
-          borderWidth: 1,
-          marginTop: 32,
-          width: 288,
-          borderRadius: 6,
-        }}
-        onChangeText={setlastName}
-        value={lastName}
-        placeholder="Last Name"
-      />
-      <TextInput
-        style={{
-          height: 40,
-          borderColor: '#BCE0FD',
-          borderWidth: 1,
-          marginTop: 32,
-          width: 288,
-          borderRadius: 6,
-        }}
-        onChangeText={setaddress}
-        value={address}
-        placeholder="Address"
-      />
-      <TextInput
-        style={{
-          height: 40,
-          borderColor: '#BCE0FD',
-          borderWidth: 1,
-          marginTop: 32,
-          width: 288,
-          borderRadius: 6,
-        }}
-        onChangeText={setcontactNumber}
-        value={contactNumber}
-        placeholder="Contact Number"
-      />
-      <View style={{height: 48, width: 295, marginTop: 28, borderRadius: 6}}>
-        <Button title="Take Picture" onPress={() => setModalVisible(true)} />
-      </View>
-      <View style={{height: 48, width: 295, marginTop: 28, borderRadius: 6}}>
-        <Button
-          title="Sign in"
-          onPress={() =>
-            signIn({contactNumber, address, lastName, firstName, photo})
-          }
-        />
-      </View>
-      <Text>SLIIT</Text>
-    </View>
+          <TextInput
+            style={{
+              height: 40,
+              borderColor: '#BCE0FD',
+              borderWidth: 1,
+              marginTop: 32,
+              width: 288,
+              borderRadius: 6,
+            }}
+            onChangeText={setfirstName}
+            value={firstName}
+            placeholder="First Name"
+          />
+          <TextInput
+            style={{
+              height: 40,
+              borderColor: '#BCE0FD',
+              borderWidth: 1,
+              marginTop: 32,
+              width: 288,
+              borderRadius: 6,
+            }}
+            onChangeText={setlastName}
+            value={lastName}
+            placeholder="Last Name"
+          />
+          <TextInput
+            style={{
+              height: 40,
+              borderColor: '#BCE0FD',
+              borderWidth: 1,
+              marginTop: 32,
+              width: 288,
+              borderRadius: 6,
+            }}
+            onChangeText={setaddress}
+            value={address}
+            placeholder="Address"
+          />
+          <TextInput
+            style={{
+              height: 40,
+              borderColor: '#BCE0FD',
+              borderWidth: 1,
+              marginTop: 32,
+              width: 288,
+              borderRadius: 6,
+            }}
+            onChangeText={setcontactNumber}
+            value={contactNumber}
+            placeholder="Contact Number"
+          />
+          <View
+            style={{height: 48, width: 295, marginTop: 28, borderRadius: 6}}>
+            <Button
+              title="Take Picture"
+              onPress={() => setModalVisible(true)}
+            />
+          </View>
+          <View
+            style={{height: 48, width: 295, marginTop: 28, borderRadius: 6}}>
+            <Button
+              title="Sign in"
+              onPress={() =>
+                signIn({contactNumber, address, lastName, firstName, photo})
+              }
+            />
+          </View>
+          <Text>SLIIT</Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 // }

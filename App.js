@@ -15,6 +15,7 @@ import Shopping from './src/screens/shopping';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {AuthContext} from './src/screens/context';
+import Items from './src/screens/items';
 import {AsyncStorage} from 'react-native';
 import {View, ActivityIndicator, Modal, Image} from 'react-native';
 
@@ -90,14 +91,17 @@ export default function App({navigation}) {
         console.log('SIGNIN');
         // console.log(data);
         try {
-          fetch(`http://192.168.8.100:3000/customer`, {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
+          fetch(
+            `http://1f69-2402-4000-2080-b25d-5522-487b-483d-8358.ngrok.io/customer`,
+            {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
             },
-            body: JSON.stringify(data),
-          })
+          )
             .then(res => res.json())
             .then(async res => {
               console.log('res');
@@ -157,6 +161,7 @@ export default function App({navigation}) {
               <Stack.Screen name="recommnder" component={Recommndations} />
               <Stack.Screen name="shopping" component={Shopping} />
               <Stack.Screen name="remainder" component={Remainder} />
+              <Stack.Screen name="rate" component={Items} />
             </>
           )}
         </Stack.Navigator>
