@@ -31,7 +31,7 @@ const LoginScreen = ({navigation: {navigate}}) => {
     if (cameraRef) {
       const options = {quality: 0.5, base64: true};
       const data = await cameraRef.current.takePictureAsync(options);
-      console.log(data.base64);
+      // console.log(data.base64);
       setphoto(data.base64);
 
       setModalVisible(false);
@@ -43,7 +43,7 @@ const LoginScreen = ({navigation: {navigate}}) => {
       <View style={styles.container}></View>
       <Image
         style={{width: 160, height: 160, marginTop: 150}}
-        source={require('../images/CS.png')}
+        source={require('../images/CS.jpg')}
       />
       <Modal
         animationType="slide"
@@ -58,6 +58,7 @@ const LoginScreen = ({navigation: {navigate}}) => {
           style={styles.preview}
           type={RNCamera.Constants.Type.back}
           flashMode={RNCamera.Constants.FlashMode.on}
+          focusDepth={1}
         />
         <View
           style={{

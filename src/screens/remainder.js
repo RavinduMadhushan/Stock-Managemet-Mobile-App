@@ -25,30 +25,26 @@ export default class Remainder extends React.Component {
 
   fetchCats() {
     this.setState({refreshing: true});
-    const MarvelList = [
-      {id: 1, name: 'Mailk Powder', quantity: 3},
-      {id: 2, name: 'Apple Juice', quantity: 2},
-      {id: 3, name: 'Cheese', quantity: 1},
-      {id: 4, name: 'Eggs', quantity: 1},
-    ];
 
-    this.setState({data: MarvelList});
-    this.setState({refreshing: false});
-    fetch(
-      'http://2344-2402-4000-2280-97f7-1d26-d91a-7ab9-7e1e.ngrok.io/api/purchase/prediction',
-      {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({item_id: 'aaa'}),
+    let MarvelList = [];
+
+    fetch('http://34.121.6.202:5000/api/purchase/prediction', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-    )
+      body: JSON.stringify({item_id: 'aaa'}),
+    })
       .then(res => res.json())
       .then(resJson => {
-        this.setState({data: resJson});
+        if (resJson.new_prediction > 0) alert('You may run out of eggs soon');
+        MarvelList = [{id: 1, name: 'EGG', quantity: resJson.new_prediction}];
+
+        this.setState({data: MarvelList});
         this.setState({refreshing: false});
+        // alert(resJson);
+        // this.setState({data: resJson});
       })
       .catch(e => console.log(e));
   }

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Text,
+  ScrollView,
 } from 'react-native';
 
 export default class Recommndations extends React.Component {
@@ -25,35 +26,49 @@ export default class Recommndations extends React.Component {
 
   fetchCats() {
     this.setState({refreshing: true});
-    // const MarvelList = [
-    //   {id: 1, name: 'Mailk Powder',quantity:4.75},
-    //   {id: 2, name: 'Apple Juice',quantity:4.3},
-    //   {id: 3, name: 'Cheese',quantity:3},
-    //   {id: 4, name: 'The Collector',quantity:2},
-    // ];
-    fetch(
-      'https://2344-2402-4000-2280-97f7-1d26-d91a-7ab9-7e1e.ngrok.io/api/item/rating',
-      {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify([
-          5.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0,
-          0.0,
-        ]),
+    let MarvelList = [
+      {id: 1, name: 'Lux Soap', quantity: 0},
+      {id: 2, name: 'Lifeboy Soap', quantity: 0},
+      {id: 3, name: 'Velvet Soap', quantity: 0},
+      {id: 4, name: 'Ceylon Tea', quantity: 0},
+      {id: 5, name: 'Dilmah Tea', quantity: 0},
+      {id: 6, name: 'Kotmale Milk', quantity: 0},
+      {id: 7, name: 'Kotmale Milk ', quantity: 0},
+      {id: 8, name: 'Anchor Milk Powder', quantity: 0},
+      {id: 9, name: 'Ratthi Milk Powder ', quantity: 0},
+      {id: 10, name: 'Ambewela Fresh Milk', quantity: 0},
+      {id: 11, name: 'Happy Cow  Chees', quantity: 0},
+      {id: 12, name: 'Anchor Butter', quantity: 0},
+      {id: 13, name: 'Elephant House  Sausages', quantity: 0},
+      {id: 14, name: 'Goldi Sausages', quantity: 0},
+      {id: 15, name: 'Keells Meat Ball', quantity: 0},
+    ];
+    fetch('http://34.121.6.202:5000/api/item/rating', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-    )
+      body: JSON.stringify([
+        5.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0,
+        0.0,
+      ]),
+    })
       .then(res => res.json())
       .then(resJson => {
-        this.setState({data: resJson});
+        console.log('hello');
+        let arr = JSON.parse(resJson.rating);
+        for (let index = 0; index < MarvelList.length; index++) {
+          const element = MarvelList[index];
+          element.quantity = Math.round(parseFloat(arr[index]));
+          // console.log(element);
+        }
+        // console.log('xxxxxxx');
+        console.log(MarvelList);
+        this.setState({data: MarvelList});
         this.setState({refreshing: false});
       })
       .catch(e => console.log(e));
-
-    this.setState({data: MarvelList});
-    this.setState({refreshing: false});
   }
 
   renderItemComponent = data => (
@@ -96,27 +111,29 @@ export default class Recommndations extends React.Component {
   render() {
     return (
       <SafeAreaView>
-        <Text
-          style={{
-            fontSize: 35,
-            fontWeight: 'bold',
-            textAlign: 'center',
-            marginBottom: 20,
-          }}>
-          {' '}
-          You Would love to try
-        </Text>
-        <Text style={{fontSize: 25, fontWeight: 'bold', textAlign: 'center'}}>
-          Item :- Probabiliy
-        </Text>
-        <FlatList
-          data={this.state.data}
-          renderItem={item => this.renderItemComponent(item)}
-          keyExtractor={item => item.id.toString()}
-          ItemSeparatorComponent={this.ItemSeparator}
-          refreshing={this.state.refreshing}
-          onRefresh={this.handleRefresh}
-        />
+        <ScrollView>
+          <Text
+            style={{
+              fontSize: 35,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              marginBottom: 20,
+            }}>
+            {' '}
+            You Would love to try
+          </Text>
+          <Text style={{fontSize: 25, fontWeight: 'bold', textAlign: 'center'}}>
+            Item :- Probabiliy
+          </Text>
+          <FlatList
+            data={this.state.data}
+            renderItem={item => this.renderItemComponent(item)}
+            keyExtractor={item => item.id.toString()}
+            ItemSeparatorComponent={this.ItemSeparator}
+            refreshing={this.state.refreshing}
+            onRefresh={this.handleRefresh}
+          />
+        </ScrollView>
       </SafeAreaView>
     );
   }

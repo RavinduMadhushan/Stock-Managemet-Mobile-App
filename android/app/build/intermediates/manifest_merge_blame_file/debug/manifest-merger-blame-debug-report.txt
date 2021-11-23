@@ -48,7 +48,7 @@
 26-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Ravindu\.gradle\caches\transforms-3\a0e40bdc1ba615c480eeb4e284f3d2c5\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:25:22-76
 27
 28    <application
-28-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:12:5-30:19
+28-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:12:5-31:19
 29        android:name="com.user.MainApplication"
 29-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:13:7-38
 30        android:allowBackup="false"
@@ -65,31 +65,31 @@
 36        android:theme="@style/AppTheme"
 36-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:18:7-38
 37        android:usesCleartextTraffic="true" >
-37-->C:\React\Supervisor\User\android\app\src\debug\AndroidManifest.xml:8:9-44
+37-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:19:7-42
 38        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 38-->C:\React\Supervisor\User\android\app\src\debug\AndroidManifest.xml:11:9-86
 38-->C:\React\Supervisor\User\android\app\src\debug\AndroidManifest.xml:11:19-83
 39        <activity
-39-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:19:7-29:18
+39-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:20:7-30:18
 40            android:name="com.user.MainActivity"
-40-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:20:9-37
+40-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:21:9-37
 41            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-41-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:22:9-86
+41-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:23:9-86
 42            android:label="@string/app_name"
-42-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:21:9-41
+42-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:22:9-41
 43            android:launchMode="singleTask"
-43-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:23:9-40
+43-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:24:9-40
 44            android:windowSoftInputMode="adjustResize" >
-44-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:24:9-51
+44-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:25:9-51
 45            <intent-filter>
-45-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:25:9-28:25
+45-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:26:9-29:25
 46                <action android:name="android.intent.action.MAIN" />
-46-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:26:13-65
-46-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:26:21-62
+46-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:27:13-65
+46-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:27:21-62
 47
 48                <category android:name="android.intent.category.LAUNCHER" />
-48-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:27:13-73
-48-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:27:23-70
+48-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:28:13-73
+48-->C:\React\Supervisor\User\android\app\src\main\AndroidManifest.xml:28:23-70
 49            </intent-filter>
 50        </activity>
 51

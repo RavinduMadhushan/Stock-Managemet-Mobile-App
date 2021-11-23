@@ -68,7 +68,7 @@ export default function App({navigation}) {
         let userToken;
 
         try {
-          userToken = await AsyncStorage.getItem('us');
+          userToken = await AsyncStorage.getItem('u');
         } catch (e) {}
         dispatch({type: 'RESTORE_TOKEN', token: userToken});
       };
@@ -88,9 +88,9 @@ export default function App({navigation}) {
           photo: data.photo,
         };
         console.log('SIGNIN');
-        console.log(data);
+        // console.log(data);
         try {
-          fetch(`http://192.168.8.101:3000/customer`, {
+          fetch(`http://192.168.8.100:3000/customer`, {
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -130,7 +130,7 @@ export default function App({navigation}) {
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Image
           style={{width: 300, height: 300, margin: 150}}
-          source={require('./src/images/CS.png')}
+          source={require('./src/images/CS.jpg')}
         />
       </View>
     );
